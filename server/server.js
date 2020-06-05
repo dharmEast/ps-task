@@ -6,7 +6,7 @@ import ReactDOMServer from "react-dom/server";
 
 import App from "../src/App";
 
-const PORT = 6060
+const PORT = process.env.PORT || 6060
 const app = express();
 const router = express.Router();
 
