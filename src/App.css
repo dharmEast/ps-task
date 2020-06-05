@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  padding: 1%;
+  background-color: #f5f4f3;
+  border-bottom: 5px solid #ff7700;
 }
 
 .App-logo {
@@ -93,4 +96,16 @@ a.canvasjs-chart-credit {
 }
 div#canvasjs-react-chart-container-0 {
   padding-top: 10px;
+}
+
+
+div#chart-1 {
+  margin-top: 10px;
+}
+
+tr:nth-child(odd) {
+  background:#f5f4f3
+}
+tr:nth-child(even) {
+  background:#d6d6d5
 }

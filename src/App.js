@@ -5,7 +5,7 @@ import './App.css';
 import axios from "axios";
 import BootstrapTable from "react-bootstrap-table-next";
 import * as ReactBootStrap from 'react-bootstrap';
-import { LineChart, PieChart } from 'react-chartkick'
+import { LineChart } from 'react-chartkick'
 import 'chart.js'
 const baseUrl = `https://hn.algolia.com/api/v1/search?tags=story`;
 const size = 10;
@@ -64,7 +64,6 @@ function App() {
   const getComments = async () => {
     try {
       const data = await axios.get(`https://hn.algolia.com/api/v1/search?tags=story&hitsPerPage=${size}`);
-      const totalNumberOfData = data.data.nbPages * data.data.hitsPerPage;
       localStorage.totalNoOfPage = data.data.nbPages;
       setTotalNoOfPage(data.data.nbPages);
       await getCommentsByPagination(currPage);
@@ -96,7 +95,7 @@ function App() {
     localStorage.currPage = currPage;
     dataUpdation(comments);
   }
-  function rankFormatter(cell, row, rowIndex, formatExtraData) {
+  function voteFormatter(cell, row, rowIndex, formatExtraData) {
     return (
       < div
         style={{
@@ -137,7 +136,7 @@ function App() {
     const diffInMiliseconds = currentMiliseconds - pastDateMiliseconds;
     return miliSecondToTime(diffInMiliseconds);
   }
-  function priceFormatter(cell, row, rowIndex, formatExtraData) {
+  function titleFormatter(cell, row, rowIndex, formatExtraData) {
     let hostName = null;
 
     if (row && row.url) {
@@ -180,7 +179,7 @@ function App() {
       dataField: "edit",
       text: "UpVote",
       sort: false,
-      formatter: rankFormatter,
+      formatter: voteFormatter,
       headerAttrs: { width: 100 },
       attrs: { width: 50, className: "EditRow" },
       headerStyle: (colum, colIndex) => {
@@ -197,17 +196,13 @@ function App() {
     {
       dataField: `title`,
       text: "News Details",
-      formatter: priceFormatter,
+      formatter: titleFormatter,
       headerStyle: (colum, colIndex) => {
         return { textAlign: 'center', backgroundColor: '#ff7700' };
       }
     }
   ]
 
-  const graphDataToRender = [{
-    type: "line",
-    dataPoints: graphData && graphData.length > 0 ? graphData : []
-  }]
   const handleNextData = () => {
     if (currPage === totalNoOfPage) {
       return;
@@ -230,7 +225,6 @@ function App() {
   };
 
   const handlePreviousData = () => {
-    const currPrevClass = prevClass;
     if (currPage === 1 && prevClass === 'btn') {
       return;
     }
@@ -259,6 +253,7 @@ function App() {
             keyField="name"
             data={comments}
             columns={columns}
+            bordered={false}
           />
           <div className='prev_next_class'>
             <button className={prevClass} onClick={handlePreviousData}>Previous</button>
@@ -268,7 +263,26 @@ function App() {
           <div className={'divider'}></div>
           <LineChart data={graphData}
             responsive={true}
-            xtitle="ID" ytitle="Votes"
+            xtitle="ID"
+            ytitle="Votes"
+            library={{
+              scales: {
+                xAxes: [
+                  {
+                    ticks: { fontColor: "gray",fontSize:'15',fontWeight:'bold' },
+                    gridLines: { drawBorder: true, color: "gray" },
+                    scaleLabel: { fontSize: "20",fontColor: "black" }
+                  }
+                ],
+                yAxes: [
+                  {
+                    ticks: { fontColor: "gray",fontSize:'15',fontWeight:'bold' },
+                    scaleLabel: { fontSize: "20",fontColor: "black" }, 
+                    gridLines: { drawBorder: true, color: "gray" }
+                  }
+                ]
+              }
+            }}
             curve={false} />
         </> : (
           <ReactBootStrap.Spinner animation="border" text="Data is loading" />
