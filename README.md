@@ -2,8 +2,8 @@
 
 
 ### Aplplication launch
- 1. Run yarn build 
- 2. Run yarn start
+ 1. Build the appliaction with `yarn build` command.
+ 2. Run the application with `yarn start`
  3. Launch application with http://localhost:6060/ in the browser
  
  ### Application test
