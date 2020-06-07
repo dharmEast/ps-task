@@ -1,9 +1,12 @@
+import { mount, configure } from 'enzyme';
 import React from 'react';
-import { render } from '@testing-library/react';
+import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+configure({ adapter: new Adapter() });
+const AppWrapper = mount(<App/>);
+describe('CreateMove Snapshot', () => {
+  it('to match Snapshot', () => {
+    expect(AppWrapper).toMatchSnapshot();
+  });
 });

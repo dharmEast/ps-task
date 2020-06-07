@@ -221,6 +221,7 @@ function App() {
     } else {
       getCommentsByPagination(nextPage);
     }
+    localStorage.currPage = nextPage;
     setCurrPage(nextPage);
   };
 
@@ -242,6 +243,7 @@ function App() {
     } else {
       getCommentsByPagination(prevPage);
     }
+    localStorage.currPage = prevPage;
     setCurrPage(prevPage);
   };
 

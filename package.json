@@ -29,13 +29,26 @@
     "react-table": "^7.0.5",
     "regenerator-runtime": "^0.13.5",
     "styled-components": "^4.3.2",
-    "table": "^5.4.6"
+    "table": "^5.4.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.3",
+    "jest": "^24.8.0",
+    "jest-css-modules": "^2.1.0"
   },
   "scripts": {
     "start": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +59,7 @@
       "not dead",
       "not op_mini all"
     ],
+    
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
