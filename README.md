@@ -2,9 +2,12 @@
 
 
 ### Aplplication launch
- [x] Run yarn build 
- [x] Run yarn start
- [x] Launch application with http://localhost:6060/ in the browser
+ 1. Run yarn build 
+ 2. Run yarn start
+ 3. Launch application with http://localhost:6060/ in the browser
+ 
+ ### Application test
+ Test the application with yarn test.
 
 
 ### Deployment
