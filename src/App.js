@@ -271,15 +271,19 @@ function App() {
               scales: {
                 xAxes: [
                   {
-                    ticks: { fontColor: "gray",fontSize:'15',fontWeight:'bold' },
+                    ticks: { fontColor: "gray", fontSize: '15', fontWeight: 'bold' },
                     gridLines: { drawBorder: true, color: "gray" },
-                    scaleLabel: { fontSize: "20",fontColor: "black" }
+                    scaleLabel: { fontSize: "20", fontColor: "black" }
                   }
                 ],
                 yAxes: [
                   {
-                    ticks: { fontColor: "gray",fontSize:'15',fontWeight:'bold' },
-                    scaleLabel: { fontSize: "20",fontColor: "black" }, 
+                    ticks: {
+                      fontColor: "gray", fontSize: '15', fontWeight: 'bold',
+                      maxTicksLimit:100,
+                      stepSize: 500,
+                    },
+                    scaleLabel: { fontSize: "20", fontColor: "black" },
                     gridLines: { drawBorder: true, color: "gray" }
                   }
                 ]
